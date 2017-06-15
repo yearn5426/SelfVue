@@ -15,6 +15,12 @@ module.exports = {
         loaders: [{
             test: /\.css$/,
             loader: "style-loader!css-loader"
+        }, {
+            test: /\.(png|jpg)$/,
+            loader: 'url-loader?limit=8192'
         }]
-    }
+    },
+    plugins: [
+        new Webpack.BannerPlugin("这里是打包头部注释！")
+    ]
 }
