@@ -25,5 +25,5 @@ let vueRouter = new VueRouter({
 
 new Vue({
     el: '#app',
-    render: h => h(app)
+    render: (h) => h(app)
 });

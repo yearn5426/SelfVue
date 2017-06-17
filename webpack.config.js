@@ -27,10 +27,14 @@ var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
 
 module.exports = {
     // entry: ['./src/main.js', hotMiddlewareScript],
-    entry: ['./src/main.js'],
+    entry: [
+        'webpack-dev-server/client?http://localhost:8080',
+        './src/main.js'
+    ],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
+        publicPath: '/dist/'
         // publicPath: publicPath
     },
     module: {
@@ -60,18 +64,24 @@ module.exports = {
     },
     // devtool: 'eval-source-map',
     plugins: [
-        new Webpack.BannerPlugin("这里是打包头部注释！")
+        // new Webpack.BannerPlugin("这里是打包头部注释！"),
+        new Webpack.HotModuleReplacementPlugin()
     ],
     // vue: {
     //     loaders: {
     //         css: 'style-loader!css-loader!sass-loader!autoprefixer',
     //     }
     // },
+    devServer: {
+        historyApiFallback: true,
+        hot: false,
+        inline: true
+    },
     resolve: {
         extensions: [ '.js', '.vue'],
-        modules: [path.join(__dirname, 'node_modules')],
+        // modules: [path.join(__dirname, 'node_modules')],
         alias: {
-            'vue$': 'vue/dist/vue.esm.js'
+            'vue': 'vue/dist/vue.js'
             // 'components': path.join(rootPath, 'src/components')
         }
     }

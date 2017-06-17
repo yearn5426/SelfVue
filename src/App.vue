@@ -18,6 +18,7 @@
 </script>
 <style lang="sass" rel="stylesheet/scss">
     body {
+        background: red;
         #app {
             h1{
                 color: red;
