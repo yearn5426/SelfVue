@@ -5,14 +5,14 @@
 </template>
 <script>
     export default{
-//        data(){
-//            return {
-//                message: 'not found'
-//            }
-//        }
+        data(){
+            return {
+                message: 'not found'
+            }
+        }
     }
 </script>
-<style lang="sass" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss">
     body {
         #app {
             h1{

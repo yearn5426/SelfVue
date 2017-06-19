@@ -1,28 +1,21 @@
 <template>
     <div>
-        <!--<router-view></router-view>-->
+        <router-view></router-view>
         <div>
             <h1>{{message}}</h1>
         </div>
     </div>
 </template>
 <script>
-    export default{
-        el: '#app',
+    export default {
         data(){
             return {
-                message: 'My Vue'
+                message: 'My fa'
             }
         }
     }
 </script>
-<style lang="sass" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss">
     body {
-        background: red;
-        #app {
-            h1{
-                color: red;
-            }
-        }
     }
 </style>

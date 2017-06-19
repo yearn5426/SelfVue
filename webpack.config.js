@@ -40,7 +40,18 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.vue$/,
-            loader: 'vue-loader!style-loader!css-loader!sass-loader!autoprefixer'
+            loader: 'vue-loader',
+            options: {
+                loaders: {
+                    js: 'babel-loader',
+                    sass: 'vue-style-loader!css-loader?sourceMap!sass-loader?indentedSyntax&sourceMap',
+                    scss: 'vue-style-loader!css-loader?sourceMap!sass-loader?sourceMap'
+                },
+                preloaders: {
+                    css: 'autoprefixer'
+                }
+
+            }
         }, {
             test: /\.css$/,
             loader: "style-loader!css-loader"
@@ -62,16 +73,11 @@ module.exports = {
             loader: 'html-loader'
         }]
     },
-    // devtool: 'eval-source-map',
+    devtool: 'eval-source-map',
     plugins: [
         // new Webpack.BannerPlugin("这里是打包头部注释！"),
         new Webpack.HotModuleReplacementPlugin()
     ],
-    // vue: {
-    //     loaders: {
-    //         css: 'style-loader!css-loader!sass-loader!autoprefixer',
-    //     }
-    // },
     devServer: {
         historyApiFallback: true,
         hot: false,
@@ -79,10 +85,10 @@ module.exports = {
     },
     resolve: {
         extensions: [ '.js', '.vue'],
-        // modules: [path.join(__dirname, 'node_modules')],
+        modules: [path.join(__dirname, 'node_modules')],
         alias: {
-            'vue': 'vue/dist/vue.js'
-            // 'components': path.join(rootPath, 'src/components')
+            'vue$': 'vue/dist/vue.common.js',
+            'components': path.join(rootPath, 'src/components')
         }
     }
 }
