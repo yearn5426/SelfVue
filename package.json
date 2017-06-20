@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "vue": "^2.3.4",
-    "vue-router": "^2.5.3"
+    "vue-router": "^2.5.3",
+    "vux": "^2.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
@@ -26,6 +27,8 @@
     "css-loader": "^0.28.4",
     "file-loader": "^0.11.2",
     "html-loader": "^0.4.5",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.4",
     "node-sass": "^4.5.3",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
@@ -34,9 +37,12 @@
     "vue-loader": "^12.2.1",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.3.4",
+    "vux-loader": "^1.0.68",
     "webpack": "^2.6.1",
     "webpack-dev-middleware": "^1.10.2",
     "webpack-dev-server ": "^2.4.5",
-    "webpack-hot-middleware": "^2.18.0"
+    "webpack-hot-middleware": "^2.18.0",
+    "webpack-merge": "^4.1.0",
+    "yaml-loader": "^0.4.0"
   }
 }

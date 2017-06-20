@@ -18,15 +18,16 @@
 *   autoprefixer 自动添加css前缀
 *
 */
+"use strict";
+
 
 var Webpack = require('webpack');
 var path = require('path');
 var rootPath = path.resolve(__dirname);
-// var publicPath = 'http://localhost:3000/';
-var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
+// var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
+const vuxLoader = require('vux-loader');
 
-module.exports = {
-    // entry: ['./src/main.js', hotMiddlewareScript],
+let webpackConfig = module.exports = {
     entry: [
         'webpack-dev-server/client?http://localhost:8080',
         './src/main.js'
@@ -35,29 +36,28 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
         publicPath: '/dist/'
-        // publicPath: publicPath
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.vue$/,
             loader: 'vue-loader',
             options: {
                 loaders: {
                     js: 'babel-loader',
                     sass: 'vue-style-loader!css-loader?sourceMap!sass-loader?indentedSyntax&sourceMap',
-                    scss: 'vue-style-loader!css-loader?sourceMap!sass-loader?sourceMap'
+                    scss: 'vue-style-loader!css-loader?sourceMap!sass-loader?sourceMap',
+                    less: 'vue-style-loader!css-loader?sourceMap!less-loader?sourceMap'
                 },
                 preloaders: {
                     css: 'autoprefixer'
                 }
-
             }
         }, {
             test: /\.css$/,
             loader: "style-loader!css-loader"
         }, {
-            test: /\.(png|jpg)$/,
-            loader: 'url-loader?limit=8192'
+            test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+            loader: 'url-loader?limit=10000'
         }, {
             test: /\.js$/,
             include: [
@@ -67,7 +67,22 @@ module.exports = {
             loader: 'babel-loader'
         }, {
             test: /\.scss$/,
-            loader: 'sass-loader'
+            use: [{
+                loader: "style-loader" // creates style nodes from JS strings
+            }, {
+                loader: "css-loader" // translates CSS into CommonJS
+            }, {
+                loader: "sass-loader" // compiles Less to CSS
+            }]
+        }, {
+            test: /\.less/,
+            use: [{
+                loader: "style-loader" // creates style nodes from JS strings
+            }, {
+                loader: "css-loader" // translates CSS into CommonJS
+            }, {
+                loader: "less-loader" // compiles Less to CSS
+            }]
         }, {
             test: /\.html$/,
             loader: 'html-loader'
@@ -84,11 +99,15 @@ module.exports = {
         inline: true
     },
     resolve: {
-        extensions: [ '.js', '.vue'],
-        modules: [path.join(__dirname, 'node_modules')],
+        extensions: [ '.js', '.vue', 'json'],
+        // modules: [path.join(__dirname, 'node_modules')],
         alias: {
             'vue$': 'vue/dist/vue.common.js',
             'components': path.join(rootPath, 'src/components')
         }
     }
 }
+
+module.exports = vuxLoader.merge(webpackConfig, {
+    plugins: ['vux-ui']
+})

@@ -1,0 +1,10 @@
+{
+  "name": "selfvue",
+  "description": "my first vue project",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "Ionicons": "ionicons#^2.0.1"
+  }
+}

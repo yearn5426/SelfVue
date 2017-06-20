@@ -6,3 +6,6 @@ import Vue from 'vue';
 import axios from 'axios';
 
 Vue.prototype.$http = axios;
+
+const FastClick = require('fastclick');
+FastClick.attach(document.body);
