@@ -14,10 +14,5 @@
 </script>
 <style lang="scss" rel="stylesheet/scss">
     body {
-        #app {
-            h1{
-                color: red;
-            }
-        }
     }
 </style>

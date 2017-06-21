@@ -2,7 +2,7 @@
     <div>
         <router-view></router-view>
         <tabbar>
-            <tabbar-item @on-item-click="goTo(item.routeName)" v-for="item in tabList">
+            <tabbar-item @on-item-click="goTo(item.routeName)" v-for="item in tabList" :key="item.name">
                 <i slot="icon" class="icon" :class="item.icon"></i>
                 <span slot="label">{{item.name}}</span>
             </tabbar-item>
@@ -54,8 +54,14 @@
     body {
         margin: 0;
         padding: 0;
-        img{
-            width: 50px;
+        .weui-tabbar{
+            height: 3.5rem;
+            a {
+                height: calc(3.5rem - 5px);
+                .weui-tabbar__label{
+                    margin: 0;
+                }
+            }
         }
     }
 </style>
