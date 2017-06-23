@@ -6,7 +6,7 @@
 </template>
 <script>
     import YHeader from 'components/y-header'
-    import AntiBaidu from '../common/anti-baidu'
+    import antiAd from '../common/anti-ad'
     export default{
         components: {
             YHeader
@@ -27,7 +27,7 @@
             let iframe = document.querySelector('#y-iframe');
             iframe.onload = ()=>{
                 if(!iframe.contentDocument.getElementById('y-script')){
-                    AntiBaidu(iframe.contentDocument)
+                    antiAd(iframe.contentDocument)
                 }
             }
         },
