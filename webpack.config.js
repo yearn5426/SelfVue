@@ -33,8 +33,9 @@ let webpackConfig = module.exports = {
         './src/main.js'
     ],
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, './dist'),
         filename: 'bundle.js',
+        // publicPath: '/SelfVue/dist/'
         publicPath: '/dist/'
     },
     module: {
@@ -56,7 +57,7 @@ let webpackConfig = module.exports = {
             test: /\.css$/,
             loader: "style-loader!css-loader"
         }, {
-            test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+            test: /\.(png|jpe?g|gif|svg|eot|ttf|woff)(\?.*)?$/,
             loader: 'url-loader?limit=10000'
         }, {
             test: /\.js$/,
