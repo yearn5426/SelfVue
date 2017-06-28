@@ -29,14 +29,14 @@ const vuxLoader = require('vux-loader');
 
 let webpackConfig = module.exports = {
     entry: [
-        'webpack-dev-server/client?http://localhost:8080',
+        // 'webpack-dev-server/client?http://localhost:8080',
         './src/main.js'
     ],
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: 'bundle.js',
-        // publicPath: '/SelfVue/dist/'
-        publicPath: '/dist/'
+        publicPath: '/SelfVue/dist/'
+        // publicPath: '/dist/'
     },
     module: {
         rules: [{
@@ -89,16 +89,19 @@ let webpackConfig = module.exports = {
             loader: 'html-loader'
         }]
     },
-    devtool: 'eval-source-map',
+    node: {
+        fs: 'empty'
+    },
+    // devtool: 'eval-source-map',
     plugins: [
         // new Webpack.BannerPlugin("这里是打包头部注释！"),
-        new Webpack.HotModuleReplacementPlugin()
+        // new Webpack.HotModuleReplacementPlugin()
     ],
-    devServer: {
-        historyApiFallback: true,
-        hot: false,
-        inline: true
-    },
+    // devServer: {
+    //     historyApiFallback: true,
+    //     hot: false,
+    //     inline: true
+    // },
     resolve: {
         extensions: [ '.js', '.vue', 'json'],
         // modules: [path.join(__dirname, 'node_modules')],
