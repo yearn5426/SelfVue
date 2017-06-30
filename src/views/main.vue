@@ -12,6 +12,26 @@
 <script type="text/ecmascript-6">
     import YHeader from 'components/y-header'
 
+    function unescapeStr(str) {
+        return unescape(str.replace(/&#x/g,'%u').replace(/;/g,''));
+    }
+
+    function getTitle(str) {
+        let isOW = false;
+        str = unescapeStr(str);
+        let ow = str.indexOf('<i class="c-text c-text-public c-gap-left-small">官网</i>');
+        if( ow != -1 ){
+            str = str.slice(0, ow);
+            isOW = true;
+        }
+        return {
+            title: str.replace(/\<[^(em)].+?\>/g,  (word)=> {
+                return word == '</em>' ? word : '';
+            }),
+            isOW
+        }
+    }
+
     export default{
         components: {
             YHeader
@@ -30,26 +50,51 @@
 //                        searchKey: this.searchKey
 //                    }
 //                })
+
+                /*
+                 c-line-clamp2
+                 c-line-clamp4
+                 c-line-clamp3
+
+                * */
                 this.$http.get('https://www.baidu.com/s?ie=UTF-8&wd=' + encodeURIComponent(this.searchKey))
                         .then(res=>{
                             let $ = this.$cheerio.load(res.data);
-                            let resultBody = $('#results .result.c-result.c-clk-recommend');
+                            let resultBody = $('#results .result.c-result');
                             let resultList = Array.from(resultBody).map((item, index)=>{
-                                let title = $($(item).find('.c-title.c-gap-top-small')[0]).html() || $($(item).find('.c-font-medium.c-color ')[0]).html();
-                                let href = $($(item).find('.c-container a.c-blocka'))[0].attribs.href;
+                                let cheerioItem = $(item);
+                                let href;
+                                let body;
+                                let title = $(cheerioItem.find('.c-title.c-gap-top-small')[0]).html() || $(cheerioItem.find('.c-font-medium.c-color ')[0]).html();
+                                let hasBody = $(cheerioItem.find('.c-abstract')[0]).html() || $(cheerioItem.find('.c-line-clamp3 ')[0]).html() || $(cheerioItem.find('.c-line-clamp4 ')[0]).html();
+                                let hasList = $(cheerioItem.find('.wa-realtime-list'))[0];
                                 let isOW = false;
-                                title = unescape(title.replace(/&#x/g,'%u').replace(/;/g,''));
-                                let ow = title.indexOf('<i class="c-text c-text-public c-gap-left-small">官网</i>');
-                                if( ow != -1 ){
-                                    title = title.slice(0, ow);
-                                    isOW = true;
+                                if ( hasList ){
+                                    href = [];
+                                    let list = $($(hasList).find(".c-gap-top-small.c-line-bottom"));
+                                    href = Array.from(list).map(listItem=>{
+                                        let cheerioListItem =$(listItem)
+                                        let itemHref = $(cheerioListItem.find('a.c-blocka'))[0].attribs.href;
+                                        let titleBody = $(cheerioListItem.find('.c-font-large'))[0];
+                                        let itemTitle = getTitle($(titleBody).html()).title;
+                                        return {
+                                            itemTitle,
+                                            itemHref
+                                        }
+                                    });
+                                } else {
+                                    href = $(cheerioItem.find('.c-container a.c-blocka'))[0].attribs.href;
+                                    let tempObj = getTitle(title);
+                                    title = tempObj.title;
+                                    isOW = tempObj.isOW;
                                 }
-                                title = title.replace(/\<[^(em)].+?\>/g,  (word)=> {
-                                    return word == '</em>' ? word : '';
-                                });
+                                if( hasBody ){
+                                    console.log(getTitle(hasBody))
+                                }
                                 return {
                                     title,
-                                    href
+                                    href,
+                                    isOW
                                 };
                             })
                 })
