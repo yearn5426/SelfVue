@@ -18,6 +18,12 @@ const SearchResult =  resolve => {
     });
 };
 
+const SearchResultNew =  resolve => {
+    require.ensure(['./views/search-result-new'], () => {
+        resolve(require("./views/search-result-new"));
+    });
+};
+
 const NotFound =  resolve => {
     require.ensure(['./views/not-found'], () => {
         resolve(require("./views/not-found"));
@@ -41,6 +47,14 @@ const routes = [
             keepAlive: true
         },
         component: SearchResult
+    }, {
+        path: '/search-result-new',
+        name: 'search-result-new',
+        meta: {
+            title: '结果',
+            keepAlive: true
+        },
+        component: SearchResultNew
     },
     {
         path: '/not-found',
