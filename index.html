@@ -6,15 +6,15 @@
     <meta name="x5-cache" content="disable">
     <meta name="x5-fullscreen" content="true">
     <meta name="full-screen" content="yes">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src * 'unsafe-inline'; media-src *; connect-src *;">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self';img-src data: ; style-src 'self' 'unsafe-inline'; media-src *; connect-src *;script-src * 'unsafe-inline';">
     <title>Title</title>
 </head>
 <body>
     <div id="app"></div>
-    <!--<script type="text/javascript" src="cordova.js"></script>-->
+    <script type="text/javascript" src="cordova.js"></script>
     <script src="dist/bundle.js"></script>
 </body>
 </html>

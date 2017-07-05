@@ -27,6 +27,7 @@
         },
         methods: {
             backClick(){
+                window.history.go(-1);
                 this.$emit('back-click')
             }
         }

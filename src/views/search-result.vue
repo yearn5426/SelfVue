@@ -1,6 +1,6 @@
 <template>
     <div>
-        <y-header title="搜索结果" :back-button="true" @back-click="goBack"></y-header>
+        <y-header title="搜索结果" :back-button="true"></y-header>
         <iframe id="y-iframe" :src="searchUrl" width="100%" :height="iframeHeight" frameborder="0"></iframe>
     </div>
 </template>
@@ -32,9 +32,6 @@
             }
         },
         methods: {
-            goBack(){
-                window.history.go(-1)
-            }
         }
     }
 </script>

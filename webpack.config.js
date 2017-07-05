@@ -35,8 +35,8 @@ let webpackConfig = module.exports = {
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: 'bundle.js',
-        publicPath: '/SelfVue/dist/'
-        // publicPath: '/dist/'
+        // publicPath: '/android_asset/www/dist/'
+        publicPath: '/dist/'
     },
     module: {
         rules: [{
@@ -104,7 +104,7 @@ let webpackConfig = module.exports = {
     // },
     resolve: {
         extensions: [ '.js', '.vue', 'json'],
-        // modules: [path.join(__dirname, 'node_modules')],
+        modules: [path.join(__dirname, 'node_modules')],
         alias: {
             'vue$': 'vue/dist/vue.common.js',
             'components': path.join(rootPath, 'src/components')

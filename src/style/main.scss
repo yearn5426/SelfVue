@@ -1,5 +1,9 @@
 @import '../../bower_components/Ionicons/css/ionicons.min.css';
 
-.weui-tabbar{
+body .weui-tabbar{
   position: fixed;
+}
+* {
+  margin: 0;
+  padding: 0;
 }

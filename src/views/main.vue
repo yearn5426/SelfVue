@@ -66,6 +66,7 @@
                                 let href;
                                 let body;
                                 let title;
+
                                 title = $(cheerioItem.find('.c-title.c-gap-top-small')[0]).html() || $(cheerioItem.find('.c-font-medium.c-color ')[0]).html();
                                 let hasBody = $(cheerioItem.find('.c-abstract')[0]).html() || $(cheerioItem.find('.c-line-clamp3 ')[0]).html() || $(cheerioItem.find('.c-line-clamp4 ')[0]).html();
                                 let hasList = $(cheerioItem.find('.wa-realtime-list'))[0];
@@ -78,7 +79,6 @@
                                         let itemHref = $(cheerioListItem.find('a.c-blocka'))[0].attribs.href;
                                         let titleBody = $(cheerioListItem.find('.c-font-large'))[0];
                                         let itemTitle = getContent($(titleBody).html(), 'title').title;
-
                                         return {
                                             itemTitle,
                                             itemHref
