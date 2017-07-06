@@ -1,8 +1,10 @@
 <template>
     <div>
         <y-header :title="'搜索'" :back-button="false"></y-header>
-        <input type="text" @change="writeSrc" v-model="searchKey">
-        <div @click="search">search</div>
+        <div class="search-body">
+            <y-input v-model="searchKey" @value-change="valueChange"></y-input>
+            <div @click="search">search</div>
+        </div>
         <div @click="spider">spider</div>
         <div v-for="item in resultList">
             <img :src="item.objURL">
@@ -11,6 +13,7 @@
 </template>
 <script type="text/ecmascript-6">
     import YHeader from 'components/y-header'
+    import YInput from 'components/y-input'
 
     function unescapeStr(str) {
         return unescape(str.replace(/&#x/g,'%u').replace(/;/g,''));
@@ -34,12 +37,13 @@
 
     export default{
         components: {
-            YHeader
+            YHeader,
+            YInput
         },
         data(){
             return {
                 resultList: [],
-                searchKey: '京东'
+                searchKey: ''
             }
         },
         methods:{
@@ -57,6 +61,8 @@
                  c-line-clamp3
 
                 * */
+
+
                 this.$http.get('https://www.baidu.com/s?ie=UTF-8&wd=' + encodeURIComponent(this.searchKey))
                         .then(res=>{
                             let $ = this.$cheerio.load(res.data);
@@ -114,12 +120,19 @@
             },
             spider(){
 
+            },
+            valueChange(val){
+                console.log(this.searchKey);
             }
+
         }
     }
 </script>
 <style lang="scss" rel="stylesheet/scss">
     body {
-
+        .search-body{
+            width: 80%;
+            margin:0 auto;
+        }
     }
 </style>
