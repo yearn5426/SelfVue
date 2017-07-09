@@ -40,8 +40,9 @@
     .y-input input{
         font-size: 1.2rem;
         border-radius: .25rem;
+        height: calc(2rem - 4px);
         &:focus{
-            border: 1px solid #0092da;
+            border: 2px solid #0092da;
             box-shadow: #0092da 0 0 1px 1px;
         }
     }
