@@ -10,7 +10,10 @@ require('./style/main.scss');
 
 import './common/common'
 
+import ToastPlugin from './plugin/toast'
+
 Vue.use(VueRouter);
+Vue.use(ToastPlugin);
 
 Vue.config.debug = true;
 Vue.config.devtools = true;

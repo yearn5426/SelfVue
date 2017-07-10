@@ -26,6 +26,7 @@
                 type: String,
                 default: 'bottom'
             },
+            transition: String,
             isShowMask: {
                 type: Boolean,
                 default: false
@@ -38,6 +39,12 @@
         },
         computed: {
             currentTransition () {
+                if (this.transition == 'no-transition'){
+                    return;
+                }
+                if (this.transition) {
+                    return this.transition
+                }
                 if (this.position === 'top') {
                     return 'vux-slide-from-top'
                 }
